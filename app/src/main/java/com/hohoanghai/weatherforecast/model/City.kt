@@ -2,7 +2,7 @@ package com.hohoanghai.weatherforecast.model
 
 import android.os.Parcelable
 import com.hohoanghai.weatherforecast.database.entity.CityEntity
-import com.hohoanghai.weatherforecast.util.unaccent
+import com.hohoanghai.weatherforecast.util.unaccented
 import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
 
@@ -29,6 +29,6 @@ data class City(
         country = country,
         latitude = coordinate.latitude,
         longitude = coordinate.longitude,
-        searchKeyword = name.unaccent().lowercase(),
+        searchKeyword = name.unaccented().lowercase(),
     )
 }
