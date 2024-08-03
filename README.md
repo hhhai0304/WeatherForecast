@@ -11,6 +11,17 @@ WeatherForecast is an Android app that provides current weather information. The
 - **Favorite Cities Management**: Add or remove cities from your favorites list.
 - **Current Weather Information**: View detailed weather information for your selected cities.
 
+## Upcoming Features
+
+- View weather based on your current location.
+- Select a location on the map to view weather information.
+- View weather forecasts for the upcoming week.
+- Improve the app interface for a better user experience.
+
+## APK Download
+
+You can download the app directly and experience it by installing the APK from [here](./apk/WeatherForecast.apk).
+
 ## Screenshots
 
 **Favorites List**
@@ -24,6 +35,8 @@ WeatherForecast is an Android app that provides current weather information. The
 **Weather Details**
 
 ![Weather Details](./screenshots/Screenshot03.png)
+
+# Developer Guide
 
 ## Installation
 
@@ -43,9 +56,28 @@ To run this project on your local machine:
 
 4. Build and run the project on an emulator or a physical device.
 
-## APK Download
+## Libraries Used
 
-You can download the app directly and experience it by installing the APK from [here](./apk/WeatherForecast.apk).
+- **Retrofit2**: For API communication.
+- **Moshi**: For JSON processing.
+- **Realm database**: For offline storage of city lists and user favorite cities.
+- **Koin**: For dependency injection.
+- **Glide**: For displaying weather icons.
+- **Coroutines**: For handling asynchronous tasks.
+- **Timber**: For logging.
+- **Material Design components, DataBinding, and ViewBinding**: For UI development.
+
+## Project Structure
+
+- **App.kt**: Sets up dependency injection, logging, and initializes the city list from assets/city.json into the Realm database on the first app launch.
+- **Activity and Fragments**: The project is structured with one main Activity that contains multiple Fragments.
+- **Directories**:
+    - **database**: Contains DAO classes for CRUD operations with Realm database and entities representing each table.
+    - **model**: Contains ViewModel classes and JSON models.
+    - **network**: Contains services for Retrofit2 API communication, custom exceptions, interceptors, and responses.
+    - **repository**: Aggregates data from DAOs and services for interaction with ViewModel.
+    - **ui**: Contains directories for each screen, with each directory including related fragments, viewmodels, and adapters.
+    - **util**: Contains necessary utilities, constants, and binding adapters for the project.
 
 ## License
 
