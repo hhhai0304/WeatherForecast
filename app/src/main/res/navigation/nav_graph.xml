@@ -8,5 +8,20 @@
         android:id="@+id/listFragment"
         android:name="com.hohoanghai.weatherforecast.ui.list.ListFragment"
         android:label="ListFragment"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_listFragment_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:popUpTo="@id/listFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.hohoanghai.weatherforecast.ui.detail.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="selectedCity"
+            app:argType="com.hohoanghai.weatherforecast.model.City" />
+    </fragment>
 </navigation>

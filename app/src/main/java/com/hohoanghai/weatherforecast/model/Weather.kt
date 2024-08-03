@@ -8,51 +8,49 @@ import kotlinx.parcelize.Parcelize
 data class Weather(
     @Json(name = "app_temp")
     val appTemp: Double,
-    val aqi: Long,
+    val aqi: Double,
     @Json(name = "city_name")
     val cityName: String,
-    val clouds: Long,
+    val clouds: Double,
     @Json(name = "country_code")
     val countryCode: String,
     val datetime: String,
-    val dewpt: Long,
-    val dhi: Long,
-    val dni: Long,
+    val dewpt: Double,
+    val dhi: Double,
+    val dni: Double,
     @Json(name = "elev_angle")
     val elevAngle: Double,
-    val ghi: Long,
-    @Json(name = "h_angle")
-    val hAngle: Long,
+    val ghi: Double,
     val lat: Double,
     val lon: Double,
     @Json(name = "ob_time")
     val obTime: String,
     val pod: String,
-    val precip: Long,
+    val precip: Double,
     val pres: Double,
-    val rh: Long,
-    val slp: Long,
-    val snow: Long,
+    val rh: Double,
+    val slp: Double,
+    val snow: Double,
     @Json(name = "solar_rad")
-    val solarRad: Long,
+    val solarRad: Double,
     val sources: List<String>,
     @Json(name = "state_code")
     val stateCode: String,
     val station: String,
     val sunrise: String,
     val sunset: String,
-    val temp: Long,
+    val temp: Double,
     val timezone: String,
-    val ts: Long,
-    val uv: Long,
-    val vis: Long,
+    val ts: Double,
+    val uv: Double,
+    val vis: Double,
     val weather: WeatherData,
     @Json(name = "wind_cdir")
     val windCdir: String,
     @Json(name = "wind_cdir_full")
     val windCdirFull: String,
     @Json(name = "wind_dir")
-    val windDir: Long,
+    val windDir: Double,
     @Json(name = "wind_spd")
     val windSpd: Double,
 ) : Parcelable

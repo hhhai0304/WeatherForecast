@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.hohoanghai.weatherforecast.databinding.FragmentListBinding
+import com.hohoanghai.weatherforecast.ui.list.ListFragmentDirections
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
@@ -19,7 +21,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @OptIn(FlowPreview::class)
 class ListFragment : Fragment() {
-
     private val viewModel: ListViewModel by viewModel()
 
     override fun onCreateView(
@@ -48,13 +49,19 @@ class ListFragment : Fragment() {
         viewModel.apply {
             favoriteCities.observe(viewLifecycleOwner) {
                 favoriteAdapter.submitList(it)
+                binding.imgEmptyList.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             }
             suggestionCities.observe(viewLifecycleOwner) {
                 suggestionAdapter.submitList(it)
             }
             currentCity.observe(viewLifecycleOwner) {
                 if (it != null) {
-
+                    findNavController().navigate(
+                        ListFragmentDirections.actionListFragmentToDetailFragment(
+                            it
+                        )
+                    )
+                    viewModel.resetState()
                 }
             }
         }

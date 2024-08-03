@@ -8,18 +8,20 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class City(
-    val id: Long,
-    val name: String,
-    val state: String,
-    val country: String,
-    @Json(name = "coord") val coordinate: Coordinate,
+    val id: Long = 0L,
+    val name: String = "",
+    val state: String = "",
+    val country: String = "",
+    @Json(name = "coord") val coordinate: Coordinate = Coordinate(),
+    val isFavorite: Boolean = false,
 ) : Parcelable {
     constructor(entity: CityEntity) : this(
         entity.id,
         entity.name,
         entity.state,
         entity.country,
-        Coordinate(entity.latitude, entity.longitude)
+        Coordinate(entity.latitude, entity.longitude),
+        entity.isFavorite
     )
 
     fun toEntity(): CityEntity = CityEntity(
@@ -30,5 +32,6 @@ data class City(
         latitude = coordinate.latitude,
         longitude = coordinate.longitude,
         searchKeyword = name.unaccented().lowercase(),
+        isFavorite = isFavorite
     )
 }

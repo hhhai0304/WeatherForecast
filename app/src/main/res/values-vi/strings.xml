@@ -2,4 +2,13 @@
 <resources>
     <string name="app_name">Weather Forecast</string>
     <string name="search_city_hint">Tìm thành phố</string>
+    <string name="weather_not_found">Không tìm thấy thông tin thời tiết của thành phố này</string>
+    <string name="unknown_error">Đã có lỗi xảy ra. Vui lòng thử lại</string>
+    <string name="weather_icon_description">Thời tiết hiện tại</string>
+    <string name="fab_detail_description">Nhấn để thêm hoặc xóa thành phố hiện tại khỏi mục yêu thích</string>
+    <string name="temperature">%d°C</string>
+    <string name="retry">Thử lại</string>
+    <string name="notice">Thông báo</string>
+    <string name="empty_list_description">Danh sách thành phố yêu thích đang trống</string>
+    <string name="empty_detail_description">Đang tải dữ liệu thời tiết</string>
 </resources>

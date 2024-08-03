@@ -21,12 +21,12 @@ interface CityRepository {
     suspend fun toggleFavorite(city: City)
 }
 
-class CityRepositoryImp(private val cityDao: CityDao) : CityRepository {
+class CityRepositoryImpl(private val cityDao: CityDao) : CityRepository {
     override suspend fun initCities(context: Context) {
         withContext(Dispatchers.IO) {
             val tableIsEmpty = cityDao.isEmpty()
             if (tableIsEmpty) {
-                val cities = readCityFromJson(context)?.map { it.toEntity() }
+                val cities = readCitiesFromJson(context)?.map { it.toEntity() }
                 if (!cities.isNullOrEmpty()) {
                     cityDao.insertAll(cities)
                 }
@@ -34,7 +34,7 @@ class CityRepositoryImp(private val cityDao: CityDao) : CityRepository {
         }
     }
 
-    private fun readCityFromJson(context: Context): List<City>? {
+    private fun readCitiesFromJson(context: Context): List<City>? {
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
@@ -54,12 +54,12 @@ class CityRepositoryImp(private val cityDao: CityDao) : CityRepository {
 
     override suspend fun search(searchKeyword: String): List<City> {
         return withContext(Dispatchers.IO) {
-            cityDao.selectByName(searchKeyword, 15).map { City(it) }
+            return@withContext cityDao.selectByName(searchKeyword, 15).map { City(it) }
         }
     }
 
     override suspend fun toggleFavorite(city: City) {
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             cityDao.toggleFavorite(city.id)
         }
     }

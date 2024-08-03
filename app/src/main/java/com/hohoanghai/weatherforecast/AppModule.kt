@@ -6,9 +6,12 @@ import com.hohoanghai.weatherforecast.database.entity.CityEntity
 import com.hohoanghai.weatherforecast.network.WeatherService
 import com.hohoanghai.weatherforecast.network.interceptor.AuthenticationInterceptor
 import com.hohoanghai.weatherforecast.repository.CityRepository
-import com.hohoanghai.weatherforecast.repository.CityRepositoryImp
+import com.hohoanghai.weatherforecast.repository.CityRepositoryImpl
+import com.hohoanghai.weatherforecast.repository.WeatherRepository
+import com.hohoanghai.weatherforecast.repository.WeatherRepositoryImpl
 import com.hohoanghai.weatherforecast.ui.detail.DetailViewModel
 import com.hohoanghai.weatherforecast.ui.list.ListViewModel
+import com.hohoanghai.weatherforecast.util.Constants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.realm.kotlin.Realm
@@ -63,10 +66,11 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-    factory<CityRepository> { CityRepositoryImp(get()) }
+    factory<CityRepository> { CityRepositoryImpl(get()) }
+    factory<WeatherRepository> { WeatherRepositoryImpl(get()) }
 }
 
 val viewModelModule = module {
     viewModel { ListViewModel(get()) }
-    viewModel { DetailViewModel(get()) }
+    viewModel { DetailViewModel(get(), get()) }
 }

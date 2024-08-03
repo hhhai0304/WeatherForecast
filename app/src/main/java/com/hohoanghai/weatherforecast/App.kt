@@ -23,7 +23,9 @@ class App : Application() {
     }
 
     private fun setupLogger() {
-        Timber.plant(Timber.DebugTree())
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 
     private fun setupDI() {

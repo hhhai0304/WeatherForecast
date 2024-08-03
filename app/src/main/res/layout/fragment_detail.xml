@@ -1,23 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.hohoanghai.weatherforecast.ui.list.ListViewModel" />
+            type="com.hohoanghai.weatherforecast.ui.detail.DetailViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.detail.DetailFragment">
+        android:layout_height="match_parent">
 
-        <TextView
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                app:navigationIcon="@drawable/ic_back"
+                app:title="@{viewModel.city.name}" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    </FrameLayout>
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showLoading="@{viewModel.state}" />
+
+            <ImageView
+                android:id="@+id/imgWeather"
+                android:layout_width="@dimen/weather_icon"
+                android:layout_height="@dimen/weather_icon"
+                android:layout_marginHorizontal="@dimen/default_padding"
+                android:contentDescription="@string/weather_icon_description"
+                app:dataState="@{viewModel.state}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:weatherIcon="@{viewModel.weather.weather.icon}" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/default_padding"
+                android:text="@{viewModel.weather.weather.description}"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                app:dataState="@{viewModel.state}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgWeather"
+                tools:text="Giông bão diện hẹp" />
+
+            <TextView
+                android:id="@+id/tvTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/default_padding"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline3"
+                app:dataState="@{viewModel.state}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+                app:temperature="@{viewModel.weather.temp}"
+                tools:text="33°C" />
+
+            <TextView
+                android:id="@+id/tvErrorTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/default_padding"
+                android:layout_marginBottom="@dimen/text_margin"
+                android:text="@string/notice"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                android:visibility="gone"
+                app:errorState="@{viewModel.state}"
+                app:layout_constraintBottom_toTopOf="@+id/tvErrorMessage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvErrorMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/default_padding"
+                android:text="@{viewModel.errorMessage}"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:visibility="gone"
+                app:errorState="@{viewModel.state}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/unknown_error" />
+
+            <Button
+                android:id="@+id/btnRetry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_margin"
+                android:text="@string/retry"
+                android:visibility="gone"
+                app:errorState="@{viewModel.state}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvErrorMessage" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imgEmptyList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/empty_detail_description"
+            android:visibility="gone"
+            app:showLoading="@{viewModel.state}"
+            app:srcCompat="@drawable/ic_empty_detail" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/default_padding"
+            android:clickable="true"
+            android:contentDescription="@string/fab_detail_description"
+            android:focusable="true"
+            android:onClick="@{() -> viewModel.toggleFavorite()}"
+            app:isFavorite="@{viewModel.city.isFavorite}"
+            app:srcCompat="@drawable/ic_favorite_outlined" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

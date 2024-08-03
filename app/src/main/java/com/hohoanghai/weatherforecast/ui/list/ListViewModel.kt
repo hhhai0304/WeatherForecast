@@ -47,10 +47,9 @@ class ListViewModel(private val cityRepository: CityRepository) : ViewModel() {
 
     fun onCitySelected(city: City) {
         _currentCity.postValue(city)
-        resetState()
     }
 
-    private fun resetState() {
+    fun resetState() {
         searchCities("")
         _currentCity.postValue(null)
     }

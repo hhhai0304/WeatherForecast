@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Weather Forecast</string>
     <string name="search_city_hint">Search your city</string>
-
+    <string name="weather_not_found">Weather info not found</string>
+    <string name="unknown_error">Unknown error, please try again</string>
+    <string name="weather_icon_description">Current weather state</string>
+    <string name="fab_detail_description">Press for add or remove current city favorite</string>
+    <string name="temperature">%d°C</string>
+    <string name="retry">Retry</string>
+    <string name="notice">Notice</string>
+    <string name="empty_list_description">Favorite city list is empty</string>
+    <string name="empty_detail_description">Weather data is loading</string>
 </resources>

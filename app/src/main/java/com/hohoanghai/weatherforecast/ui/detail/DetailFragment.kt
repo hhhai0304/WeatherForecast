@@ -5,27 +5,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.hohoanghai.weatherforecast.R
+import com.hohoanghai.weatherforecast.databinding.FragmentDetailBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = DetailFragment()
-    }
-
-    private val viewModel: DetailViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
+    private val viewModel: DetailViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+        val binding = FragmentDetailBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        binding.apply {
+            toolbar.setNavigationOnClickListener {
+                findNavController().navigate(R.id.listFragment)
+            }
+            btnRetry.setOnClickListener {
+                viewModel!!.getCurrentWeather()
+            }
+        }
+
+        val city = DetailFragmentArgs.fromBundle(requireArguments()).selectedCity
+        viewModel.getCurrentWeather(city)
+
+        return binding.root
     }
 }

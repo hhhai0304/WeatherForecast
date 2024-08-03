@@ -69,15 +69,18 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.annotation)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.koin.android)
     implementation(libs.koin.viewmodel)
+    testImplementation(libs.koin.test)
 
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
+    testImplementation(libs.coroutines.test)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)
@@ -89,6 +92,6 @@ dependencies {
     implementation(libs.moshi.adapters)
 
     implementation(libs.realm)
-
     implementation(libs.timber)
+    implementation(libs.glide)
 }
