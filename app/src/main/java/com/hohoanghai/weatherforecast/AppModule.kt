@@ -6,6 +6,7 @@ import com.hohoanghai.weatherforecast.database.entity.CityEntity
 import com.hohoanghai.weatherforecast.network.WeatherService
 import com.hohoanghai.weatherforecast.network.interceptor.AuthenticationInterceptor
 import com.hohoanghai.weatherforecast.repository.CityRepository
+import com.hohoanghai.weatherforecast.repository.CityRepositoryImp
 import com.hohoanghai.weatherforecast.ui.detail.DetailViewModel
 import com.hohoanghai.weatherforecast.ui.list.ListViewModel
 import com.squareup.moshi.Moshi
@@ -58,17 +59,14 @@ val networkModule = module {
         .client(httpClient.build())
         .build()
 
-    single<Retrofit> { retrofit }
     single<WeatherService> { retrofit.create(WeatherService::class.java) }
 }
 
 val repositoryModule = module {
-    factory { CityRepository(get()) }
+    factory<CityRepository> { CityRepositoryImp(get()) }
 }
 
 val viewModelModule = module {
-    viewModel {
-        ListViewModel(get())
-        DetailViewModel(get())
-    }
+    viewModel { ListViewModel(get()) }
+    viewModel { DetailViewModel(get()) }
 }

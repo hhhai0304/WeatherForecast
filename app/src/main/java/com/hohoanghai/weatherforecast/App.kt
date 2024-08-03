@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import timber.log.Timber
 
@@ -28,6 +29,7 @@ class App : Application() {
     private fun setupDI() {
         startKoin {
             androidContext(this@App)
+            androidLogger()
             modules(
                 listOf(
                     entityModule,

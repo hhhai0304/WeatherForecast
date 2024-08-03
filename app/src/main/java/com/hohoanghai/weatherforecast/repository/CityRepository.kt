@@ -14,8 +14,15 @@ import kotlinx.coroutines.withContext
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class CityRepository(private val cityDao: CityDao) {
-    suspend fun initCities(context: Context) {
+interface CityRepository {
+    suspend fun initCities(context: Context)
+    suspend fun getFavoriteCitiesFlow(): Flow<List<City>>
+    suspend fun search(searchKeyword: String): List<City>
+    suspend fun toggleFavorite(city: City)
+}
+
+class CityRepositoryImp(private val cityDao: CityDao) : CityRepository {
+    override suspend fun initCities(context: Context) {
         withContext(Dispatchers.IO) {
             val tableIsEmpty = cityDao.isEmpty()
             if (tableIsEmpty) {
@@ -40,18 +47,18 @@ class CityRepository(private val cityDao: CityDao) {
         }
     }
 
-    suspend fun getFavoriteCitiesFlow(): Flow<List<City>> {
+    override suspend fun getFavoriteCitiesFlow(): Flow<List<City>> {
         return cityDao.selectFavorites().asFlow().map { results -> results.list.map { City(it) } }
             .flowOn(Dispatchers.IO)
     }
 
-    suspend fun search(searchKeyword: String): List<City> {
+    override suspend fun search(searchKeyword: String): List<City> {
         return withContext(Dispatchers.IO) {
             cityDao.selectByName(searchKeyword, 15).map { City(it) }
         }
     }
 
-    suspend fun toggleFavorite(city: City) {
+    override suspend fun toggleFavorite(city: City) {
         return withContext(Dispatchers.IO) {
             cityDao.toggleFavorite(city.id)
         }
