@@ -8,7 +8,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.hohoanghai.weatherforecast.R
-import com.hohoanghai.weatherforecast.ui.detail.DetailState
+import com.hohoanghai.weatherforecast.ui.detail.viewmodel.DetailState
 
 @BindingAdapter("weatherIcon")
 fun bindIconFromWeatherIcon(view: ImageView, icon: String?) {

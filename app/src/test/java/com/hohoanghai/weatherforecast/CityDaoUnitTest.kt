@@ -5,7 +5,7 @@ import com.hohoanghai.weatherforecast.database.dao.CityDaoImp
 import com.hohoanghai.weatherforecast.database.entity.CityEntity
 import com.hohoanghai.weatherforecast.repository.CityRepository
 import com.hohoanghai.weatherforecast.repository.CityRepositoryImpl
-import com.hohoanghai.weatherforecast.ui.list.ListViewModel
+import com.hohoanghai.weatherforecast.ui.list.viewmodel.ListViewModel
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
 import kotlinx.coroutines.Dispatchers

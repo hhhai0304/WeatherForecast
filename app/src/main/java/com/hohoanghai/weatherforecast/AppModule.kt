@@ -9,8 +9,8 @@ import com.hohoanghai.weatherforecast.repository.CityRepository
 import com.hohoanghai.weatherforecast.repository.CityRepositoryImpl
 import com.hohoanghai.weatherforecast.repository.WeatherRepository
 import com.hohoanghai.weatherforecast.repository.WeatherRepositoryImpl
-import com.hohoanghai.weatherforecast.ui.detail.DetailViewModel
-import com.hohoanghai.weatherforecast.ui.list.ListViewModel
+import com.hohoanghai.weatherforecast.ui.detail.viewmodel.DetailViewModel
+import com.hohoanghai.weatherforecast.ui.list.viewmodel.ListViewModel
 import com.hohoanghai.weatherforecast.util.Constants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

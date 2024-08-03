@@ -11,7 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.hohoanghai.weatherforecast.databinding.FragmentListBinding
-import com.hohoanghai.weatherforecast.ui.list.ListFragmentDirections
+import com.hohoanghai.weatherforecast.ui.list.adapter.CityAdapter
+import com.hohoanghai.weatherforecast.ui.list.viewmodel.ListViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce

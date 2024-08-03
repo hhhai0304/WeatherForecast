@@ -1,4 +1,4 @@
-package com.hohoanghai.weatherforecast.ui.list
+package com.hohoanghai.weatherforecast.ui.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

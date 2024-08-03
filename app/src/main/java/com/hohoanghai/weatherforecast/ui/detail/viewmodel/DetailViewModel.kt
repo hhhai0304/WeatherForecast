@@ -1,4 +1,4 @@
-package com.hohoanghai.weatherforecast.ui.detail
+package com.hohoanghai.weatherforecast.ui.detail.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

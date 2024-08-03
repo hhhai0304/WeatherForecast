@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.hohoanghai.weatherforecast.ui.list.ListViewModel" />
+            type="com.hohoanghai.weatherforecast.ui.list.viewmodel.ListViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
